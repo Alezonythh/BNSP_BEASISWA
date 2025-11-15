@@ -1,11 +1,21 @@
 <?php
 
+use App\Http\Controllers\PendaftaranBeasiswaController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::redirect('/', '/jenis-beasiswa');
+
+Route::get('/jenis-beasiswa', [PendaftaranBeasiswaController::class, 'jenisBeasiswa'])
+    ->name('jenis.beasiswa');
+
+Route::get('/pendaftaran', [PendaftaranBeasiswaController::class, 'create'])
+    ->name('pendaftaran.create');
+Route::post('/pendaftaran', [PendaftaranBeasiswaController::class, 'store'])
+    ->name('pendaftaran.store');
+
+Route::get('/hasil', [PendaftaranBeasiswaController::class, 'hasil'])
+    ->name('hasil.pendaftaran');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
